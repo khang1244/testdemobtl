@@ -11,6 +11,7 @@ class ContactService {
       email: payload.email,
       address: payload.address,
       phone: payload.phone,
+      workSchedule: payload.workSchedule, // Lưu danh sách ngày làm việc
       favorite: payload.favorite,
     };
 

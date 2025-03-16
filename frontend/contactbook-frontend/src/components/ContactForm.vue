@@ -20,6 +20,31 @@
             <Field name="phone" type="tel" class="form-control" v-model="contactLocal.phone"></Field>
             <ErrorMessage name="phone" class="error-feedback"/>
         </div>
+        <div class="form-group">
+            <label>Ngày làm việc:</label>
+            <div v-for="(schedule, index) in contactLocal.workSchedule" :key="index" class="mb-2">
+                <select v-model="schedule.day" class="form-control">
+                    <option value="Thứ 2">Thứ 2</option>
+                    <option value="Thứ 3">Thứ 3</option>
+                    <option value="Thứ 4">Thứ 4</option>
+                    <option value="Thứ 5">Thứ 5</option>
+                    <option value="Thứ 6">Thứ 6</option>
+                    <option value="Thứ 7">Thứ 7</option>
+                </select>
+
+                <select v-model="schedule.timework" class="form-control mt-2">
+                    <option value="Sáng">Sáng</option>
+                    <option value="Chiều">Chiều</option>
+                    <option value="Cả ngày">Cả ngày</option>
+                </select>
+
+                <!-- Nút xóa ngày làm việc -->
+                <button type="button" class="btn btn-danger btn-sm mt-2" @click="removeWorkSchedule(index)">Xóa</button>
+            </div>
+
+            <!-- Nút thêm ngày làm việc -->
+            <button type="button" class="btn btn-secondary mt-2" @click="addWorkSchedule">+ Thêm ngày làm việc</button>
+        </div>
         
         <div class="form-group form-check">
             <input name="favorite" type="checkbox" class="form-check-input" v-model="contactLocal.favorite" />
@@ -77,6 +102,7 @@ export default {
                 address: "",
                 phone: "",
                 favorite: false,
+                workSchedule: [], // Đảm bảo có mảng rỗng ngay từ đầu
             },
             contactFormSchema,
         };
@@ -87,6 +113,15 @@ export default {
         },
         deleteContact() {
             this.$emit("delete:contact", this.contactLocal.id);
+        },
+        addWorkSchedule() {
+            if (!this.contactLocal.workSchedule) {
+                this.contactLocal.workSchedule = [];
+            }
+            this.contactLocal.workSchedule.push({ day: "", timework: "" });
+        },
+        removeWorkSchedule(index) {
+          this.contactLocal.workSchedule.splice(index, 1);
         },
         Cancel() {
             const reply = window.confirm("You have unsaved changes! Do you want to leave?")
