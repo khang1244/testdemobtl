@@ -12,6 +12,7 @@ class ContactService {
       address: payload.address,
       phone: payload.phone,
       workSchedule: payload.workSchedule, // Lưu danh sách ngày làm việc
+      image: payload.image,
       favorite: payload.favorite,
     };
 

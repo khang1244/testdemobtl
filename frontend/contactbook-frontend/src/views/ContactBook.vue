@@ -25,15 +25,22 @@
         </div>
         <div class="mt-3 col-md-6">
             <div v-if="activeContact">
-                <h4>
-                    Chi tiết liên hệ
-                    <i class="fas fa-address-card"></i>
-                </h4>
-                <ContactCard :contact="activeContact" />
-                 <router-link :to="{
+                <div class="d-flex">
+                    <div class="detail-contact mr-3">
+                        <h4>
+                            Chi tiết liên hệ
+                            <i class="fas fa-address-card"></i>
+                        </h4>
+                        <ContactCard :contact="activeContact" />
+                    </div>
+                    <div>
+                        <img :src="activeContact.image" height="200px">
+                    </div>
+                </div>
+                <router-link :to="{
                     name: 'contact.edit',
                     params: { id: activeContact._id },
-                 }">
+                }">
                     <span class="mt-2 badge badge-warning">
                         <i class="fas fa-edit"></i> Hiệu chỉnh</span>
                 </router-link>
@@ -129,6 +136,10 @@ export default {
 .page {
     text-align: left;
     max-width: 750px;
+}
+
+.detail-contact {
+    min-width: 400px;
 }
 </style>
 
